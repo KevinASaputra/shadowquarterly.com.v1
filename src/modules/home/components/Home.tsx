@@ -1,6 +1,5 @@
 import Breakline from '@/common/components/elements/Breakline';
 
-import BlogPreview from './BlogPreview';
 import Introduction from './Introduction';
 import Services from './Services';
 import LearnPreview from './LearnPreview';
