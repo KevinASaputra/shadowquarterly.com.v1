@@ -46,6 +46,7 @@ export default {
 
 					return response;
 				} catch (err) {
+					console.log('workers error:', err);
 					if (err instanceof Error) {
 						return new Response(`Error: ${(err as Error).message}`, {
 							status: 500,
