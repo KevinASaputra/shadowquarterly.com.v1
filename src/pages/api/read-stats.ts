@@ -1,27 +1,30 @@
+import { getReadStats, getALLTimeSinceToday } from '@/services/wakatime';
 import { NextApiRequest, NextApiResponse } from 'next';
-
-import { getALLTimeSinceToday, getReadStats } from '@/services/wakatime';
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
-): Promise<void> {
+) {
   try {
-    const readStatsResponse = await getReadStats();
-    const allTimeSinceTodayResponse = await getALLTimeSinceToday();
+    const [stats, all_time] = await Promise.all([
+      getReadStats(),
+      getALLTimeSinceToday(),
+    ]);
 
-    res.setHeader(
-      'Cache-Control',
-      'public, s-maxage=60, stale-while-revalidate=30'
-    );
+    if (stats.status !== 200 && all_time.status !== 200) {
+      return res.status(500).json({
+        message: 'Failed to load WakaTime data',
+        error: { stats: stats.status, all_time: all_time.status },
+      });
+    }
 
-    const data = {
-      ...readStatsResponse.data,
-      all_time_since_today: allTimeSinceTodayResponse.data,
-    };
-
-    res.status(200).json(data);
-  } catch (error) {
-    res.status(500).json({ message: 'Internal Server Error' });
+    return res.status(200).json({
+      message: 'OK',
+      stats: stats.data,
+      all_time: all_time.data,
+    });
+  } catch (err: any) {
+    console.error('[API] read-stats error:', err);
+    return res.status(500).json({ message: 'Internal Server Error' });
   }
 }
