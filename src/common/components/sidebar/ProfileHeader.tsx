@@ -19,18 +19,21 @@ const ProfileHeader = ({ expandMenu, imageSize }: ProfileHeaderProps) => {
         expandMenu && 'flex-col !items-start'
       )}
     >
-      <Image
-        src='/images/crop-kevin.png'
-        alt='Kevin Saputra'
-        width={expandMenu ? 80 : imageSize}
-        height={expandMenu ? 80 : imageSize}
-        rounded='rounded-full'
-        className='lg:hover:scale-105'
-      />
+      <Tooltip title='Shadow Quarterly'>
+        <Image
+          src='shadow.webp'
+          alt='Shadow Quarterly'
+          width={expandMenu ? 80 : imageSize}
+          height={expandMenu ? 80 : imageSize}
+          rounded='rounded-full'
+          useCdn={true}
+          className='lg:hover:scale-105'
+        />
+      </Tooltip>
       <div className='flex gap-2 items-center mt-1 lg:mt-4'>
         <Link href='/' passHref>
-          <h2 className='flex-grow text-lg lg:text-xl font-sora font-medium'>
-            Kevin Saputra
+          <h2 className='flex-grow text-lg lg:text-sm font-sora font-medium'>
+            Shadow Quarterly
           </h2>
         </Link>
         <Tooltip title='Verified'>

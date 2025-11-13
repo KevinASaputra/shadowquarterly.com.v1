@@ -102,3 +102,5 @@ const CodingActiveList = ({ data }: CodingActiveListProps) => {
 };
 
 export default CodingActiveList;
+
+// error property commit

@@ -24,7 +24,7 @@ const CodingActive = ({ lastUpdate }: CodingActiveProps) => {
 
   useEffect(() => {
     const formatLastUpdate = (): void => {
-      const lastUpdateDate = lastUpdate || data?.last_update;
+      const lastUpdateDate = lastUpdate || data?.stats?.last_update;
       if (lastUpdateDate) {
         const zonedDate = utcToZonedTime(
           zonedTimeToUtc(lastUpdateDate, 'Asia/Jakarta'),
@@ -69,8 +69,13 @@ const CodingActive = ({ lastUpdate }: CodingActiveProps) => {
         </div>
       </SectionSubHeading>
 
-      <Overview data={data} />
-      <CodingActiveList data={data} />
+      <Overview
+        data={{
+          ...data?.stats,
+          all_time: data?.all_time || { text: 'N/A', total_seconds: 0 },
+        }}
+      />
+      <CodingActiveList data={data?.stats} />
     </section>
   );
 };

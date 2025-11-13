@@ -5,13 +5,15 @@ import NextImage, { ImageProps as NextImageProps } from 'next/image';
 import { useState } from 'react';
 
 import clsxm from '@/common/libs/clsxm';
+import WorkerImageLoader from './WorkerImageLoader';
 
 type ImageProps = {
   rounded?: string;
+  useCdn?: boolean;
 } & NextImageProps;
 
 const Image = (props: ImageProps) => {
-  const { alt, src, className, rounded, ...rest } = props;
+  const { alt, src, className, rounded, useCdn, ...rest } = props;
   const [isLoading, setLoading] = useState(true);
 
   return (
@@ -23,7 +25,9 @@ const Image = (props: ImageProps) => {
       )}
     >
       <NextImage
+        loader={useCdn ? WorkerImageLoader : undefined}
         className={clsxm(
+          100,
           'duration-700 ease-in-out',
           isLoading
             ? 'scale-[1.02] blur-xl grayscale'

@@ -10,7 +10,7 @@ interface OverviewProps {
       text?: string;
       date?: string;
     };
-    all_time_since_today?: {
+    all_time?: {
       text?: string;
     };
     start_date?: string;
@@ -23,7 +23,7 @@ const Overview = ({ data }: OverviewProps) => {
   const dailyAverage = data?.human_readable_daily_average || 'N/A';
   const bestDayText = data?.best_day?.text || 'N/A';
   const bestDayDate = data?.best_day?.date;
-  const allTimeSinceToday = data?.all_time_since_today?.text || 'N/A';
+  const allTimeSinceToday = data?.all_time?.text || 'N/A';
   const startDate = data?.start_date ? formatDate(data.start_date) : '';
   const endDate = data?.end_date ? formatDate(data.end_date) : '';
   const bestDay = bestDayDate

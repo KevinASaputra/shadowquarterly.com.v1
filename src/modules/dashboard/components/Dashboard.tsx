@@ -2,10 +2,12 @@ import Breakline from '@/common/components/elements/Breakline';
 import { GITHUB_ACCOUNTS } from '@/common/constant/github';
 
 import Contributions from './Contributions';
+import CodingActive from './CodingActive';
 
 const Dashboard = () => {
   return (
     <>
+      <CodingActive />
       <Breakline className='mt-10 mb-8' />
       <div className='space-y-10'>
         {GITHUB_ACCOUNTS?.filter((account) => account?.is_active).map(
