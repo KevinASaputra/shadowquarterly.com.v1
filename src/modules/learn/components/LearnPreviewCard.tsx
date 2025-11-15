@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { AiFillFire as NewIcon } from 'react-icons/ai';
-import { AiOutlineDollarCircle as PaidIcon } from "react-icons/ai";
+import { AiOutlineDollarCircle as PaidIcon } from 'react-icons/ai';
 import { HiOutlineArrowSmRight as ViewIcon } from 'react-icons/hi';
 
 import Card from '@/common/components/elements/Card';
@@ -32,6 +32,7 @@ const LearnPreviewCard = ({
         <div className='relative'>
           <Image
             src={image}
+            useCdn={true}
             width={400}
             height={200}
             alt={title}
