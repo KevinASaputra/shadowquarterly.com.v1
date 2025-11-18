@@ -1,92 +1,3 @@
-// import Link from 'next/link';
-// import { AiFillFire as NewIcon } from 'react-icons/ai';
-// import { BiLabel as LevelIcon } from 'react-icons/bi';
-// import { AiOutlineDollarCircle as PaidIcon } from "react-icons/ai";
-// import { HiOutlineArrowSmRight as ViewIcon } from 'react-icons/hi';
-// import { MdLibraryBooks as LessonIcon } from 'react-icons/md';
-// import useSWR from 'swr';
-
-// import Card from '@/common/components/elements/Card';
-// import Image from '@/common/components/elements/Image';
-// import { ContentProps } from '@/common/types/learn';
-// import { fetcher } from '@/services/fetcher';
-// import { useState } from 'react';
-
-// const LearnCard = ({
-//   title,
-//   slug,
-//   description,
-//   image,
-//   is_new,
-//   level,
-//   is_paid,
-// }: ContentProps) => {
-//   const { data } = useSWR(`/api/learn?slug=${slug}`, fetcher);
-//   const [isHovered, setIsHovered] = useState<boolean>(false);
-
-//   const lessonCount = data?.count ?? '0';
-
-//   return (
-//     <Link href={`/learn/${slug}`}>
-//       <Card className='group relative border border-neutral-200 dark:border-neutral-900 lg:hover:scale-[102%] cursor-pointer rounded-lg w-full hover:rounded-lg'
-//       >
-//         {is_new && (
-//           <div className='flex items-center gap-1 absolute top-0 right-0 bg-yellow-300 text-emerald-950 text-[13px] font-medium py-1 px-2 rounded-bl-xl rounded-tr-xl z-[2]'>
-//             <NewIcon size={15} />
-//             <span>New</span>
-//           </div>
-//         )}
-//         {is_paid && (
-//           <div className='flex items-center gap-1 absolute top-0 right-0 bg-lime-300 text-emerald-950 text-[13px] font-medium py-1 px-2 rounded-bl-xl rounded-tr-xl z-[2]'>
-//             <PaidIcon size={15} />
-//             <span>Paid</span>
-//           </div>
-//         )}
-//         <div className='relative'>
-//           <Image
-//             src={image}
-//             useCdn={true}
-//             width={400}
-//             height={200}
-//             alt={title}
-//             className='object-cover object-left w-full h-full rounded-lg transform transition-transform duration-300 group-hover:scale-105 group-hover:blur-sm'
-//           />
-//           <div className='gap-1 absolute top-0 left-0 w-full h-full bg-black opacity-0 transition-opacity duration-300 flex justify-center items-center text-white group-hover:opacity-80 rounded-t-xl text-sm font-medium'>
-//             <span>View Lessons</span>
-//             <ViewIcon size={20} />
-//           </div>
-//         </div>
-//         <div className='flex flex-col justify-between p-5 space-y-3'>
-//           <div className='space-y-2'>
-//             <div className='flex justify-between'>
-//               <div className='text-lg font-sora cursor-pointer text-neutral-700 dark:text-neutral-300 lg:group-hover:text-teal-600 dark:group-hover:text-teal-400 transition-all duration-300'>
-//                 {title}
-//               </div>
-//             </div>
-//             <p className='text-neutral-700 dark:text-neutral-400 text-[.9375rem] leading-relaxed'>
-//               {description}
-//             </p>
-//           </div>
-//           <div className='flex gap-4 text-neutral-600 dark:text-neutral-400'>
-//             <div className='flex gap-1 items-center'>
-//               <LessonIcon size={16} />
-//               <span className='text-sm ml-0.5'>
-//                 {`${lessonCount} ${lessonCount > 1 ? 'Lessons' : 'Lesson'}`}
-//               </span>
-//             </div>
-//             <div className='flex gap-1 items-center'>
-//               <LevelIcon size={16} />
-//               <span className='text-sm ml-0.5'>{level}</span>
-//             </div>
-//           </div>
-//         </div>
-//       </Card>
-//     </Link>
-//   );
-// };
-
-// export default LearnCard;
-
 import Link from 'next/link';
 import { useState } from 'react';
 import { motion } from 'framer-motion';
@@ -129,20 +40,6 @@ const LearnCard = ({
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
-        {is_new && (
-          <div className='absolute dark:border-stone-50 border-neutral-700 transition-transform group-hover:scale-105 duration-300 top-0 right-0 bg-yellow-300 text-emerald-950 text-[13px] font-medium py-1 px-2 rounded-bl-xl rounded-tr-xl z-[5] flex gap-1'>
-            <NewIcon size={15} />
-            <span>New</span>
-          </div>
-        )}
-
-        {is_paid && (
-          <div className='absolute top-0 right-0 bg-lime-300 text-emerald-950 text-[13px] font-medium py-1 px-2 rounded-bl-xl rounded-tr-xl z-[5] flex gap-1'>
-            <PaidIcon size={15} />
-            <span>Paid</span>
-          </div>
-        )}
-
         <div className='relative rounded-xl overflow-hidden duration-500 border-b border-neutral-700'>
           <Image
             src={image}
@@ -153,6 +50,19 @@ const LearnCard = ({
             className='object-cover w-full h-full object-centers transition-transform duration-300 group-hover:scale-105 group-hover:blur-sm'
           />
           <div className='flex gap-2 absolute top-2 left-2 transition-transform group-hover:scale-105 duration-300'>
+            {is_new && (
+              <div className='px-2.5 py-1 rounded-full text-xs font-mono text-neutral-800 bg-neutral-50 dark:bg-neutral-800 dark:text-neutral-400 border border-neutral-800 flex items-center gap-1 transition-all duration-300'>
+                <NewIcon size={15} className='text-[#9d4edd]' />
+                <span>New</span>
+              </div>
+            )}
+
+            {is_paid && (
+              <div className='px-2.5 py-1 rounded-full text-xs font-mono text-neutral-800 bg-neutral-50 dark:bg-neutral-800 dark:text-neutral-400 border border-neutral-800 flex items-center gap-1 transition-all duration-300'>
+                <PaidIcon size={15} />
+                <span>Paid</span>
+              </div>
+            )}
             <div className='px-2.5 py-1 rounded-full text-xs font-mono text-neutral-800 bg-neutral-50 dark:bg-neutral-800 dark:text-neutral-400 border border-neutral-800 flex items-center gap-1 transition-all duration-300'>
               <LessonIcon size={14} />
               {lessonCount} Lessons
