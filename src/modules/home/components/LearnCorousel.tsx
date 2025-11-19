@@ -5,7 +5,7 @@ import { useMemo, useRef } from 'react';
 import { useDraggable } from 'react-use-draggable-scroll';
 
 import { LEARN_CONTENTS } from '@/common/constant/learn';
-import LearnPreviewCard from '@/modules/learn/components/LearnPreviewCard';
+import LearnCard from '@/modules/learn/components/LearnCard';
 import BlogCardNewSkeleton from '@/common/components/skeleton/BlogCardNewSkeleton';
 
 type Props = {
@@ -14,7 +14,11 @@ type Props = {
   loading?: boolean;
 };
 
-const LearnCarousel = ({ perPage = 4, showOnly = 'all', loading = false }: Props) => {
+const LearnCarousel = ({
+  perPage = 4,
+  showOnly = 'all',
+  loading = false,
+}: Props) => {
   const containerRef = useRef<HTMLElement | null>(null);
   const setContainerRef = (node: HTMLDivElement | null) => {
     containerRef.current = node;
@@ -34,7 +38,9 @@ const LearnCarousel = ({ perPage = 4, showOnly = 'all', loading = false }: Props
 
   const renderCards = () => {
     if (loading) {
-      return Array.from({ length: 3 }, (_, idx) => <BlogCardNewSkeleton key={idx} />);
+      return Array.from({ length: 3 }, (_, idx) => (
+        <BlogCardNewSkeleton key={idx} />
+      ));
     }
 
     return items.map((item, idx) => (
@@ -44,20 +50,20 @@ const LearnCarousel = ({ perPage = 4, showOnly = 'all', loading = false }: Props
         animate={{ opacity: 1, x: 0 }}
         exit={{ opacity: 0, x: -100 }}
         transition={{ duration: 0.5, delay: idx * 0.03 }}
-        className="min-w-[326px] gap-x-5"
+        className='min-w-[326px] gap-x-5'
       >
-        <LearnPreviewCard {...item} />
+        <LearnCard {...item} />
       </motion.div>
     ));
   };
 
   return (
     <div
-      className="flex p-1 gap-4 overflow-x-scroll scrollbar-hide"
+      className='flex p-5 gap-5 overflow-x-scroll scrollbar-hide'
       {...events}
       ref={setContainerRef}
-      role="list"
-      aria-label="Learn preview carousel"
+      role='list'
+      aria-label='Learn preview carousel'
     >
       {renderCards()}
     </div>
